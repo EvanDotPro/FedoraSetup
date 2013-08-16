@@ -1,0 +1,8 @@
+---
+php:
+  ini_path: "/etc/php.ini"
+  ini:
+    memory_limit: 128M
+    short_open_tag: off
+    upload_max_filesize: 32M
+    post_max_size: ${php.ini.upload_max_filesize}

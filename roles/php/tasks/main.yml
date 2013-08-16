@@ -1,0 +1,35 @@
+---
+- name: Installing PHP
+  yum: pkg=${item} state=latest
+  with_items:
+    - php
+    - php-cli
+    - php-gd
+    - php-intl
+    - php-mbstring
+    - php-mcrypt
+    - php-mysql
+    - php-pdo
+    - php-pear
+    - php-tidy
+    - php-xml
+    - php-xmlrpc
+
+- name: Setting PHP ini parameters
+  ini_file: dest=${php.ini_path} section=PHP option=${item.option} value=${item.value}
+  with_items:
+    - option: memory_limit
+      value: ${php.ini.memory_limit}
+
+    - option: short_open_tag
+      value: ${php.ini.short_open_tag}
+
+    - option: error_reporting
+      value: E_ALL
+    - option: display_errors
+      value: off
+
+    - option: post_max_size
+      value: ${php.ini.post_max_size}
+    - option: upload_max_filesize
+      value: ${php.ini.upload_max_filesize}
